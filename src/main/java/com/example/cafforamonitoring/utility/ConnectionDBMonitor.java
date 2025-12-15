@@ -11,9 +11,9 @@ public class ConnectionDBMonitor {
     static {
         try {
             Context context = new InitialContext();
-            DataSource dataSource = (DataSource)context.lookup("java:comp/env/jdbc/caffora_monitor_db");
+            dataSource = (DataSource)context.lookup("java:comp/env/jdbc/caffora_monitor_db");
         } catch (Exception e) {
-            throw new RuntimeException("Driver MariaDB non trovato!", e);
+            throw new RuntimeException("Impossibile trovare il DataSource", e);
         }
     }
 
