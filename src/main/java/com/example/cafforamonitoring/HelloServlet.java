@@ -19,7 +19,12 @@ public class HelloServlet extends HttpServlet {
         // Hello
         PrintWriter out = response.getWriter();
         out.println("<html><body>");
-        out.println("<h1>" + message + "</h1>");
+        String nome = request.getParameter("nome");
+        if((nome == null) || (nome.isEmpty())){
+            out.println("<h1>" + message + "</h1>");
+        }else{
+            out.println("<h1>" + message + " "+ request.getParameter("nome") + "</h1>");
+        }
         out.println("</body></html>");
     }
 
