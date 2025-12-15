@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourcePerFileMappings">
+    <file url="mock:///MachineDAO.java" value="2cd98f35-0807-4bd3-b7e1-b62676b21b3d" />
     <file url="file://$APPLICATION_CONFIG_DIR$/consoles/db/2cd98f35-0807-4bd3-b7e1-b62676b21b3d/console.sql" value="2cd98f35-0807-4bd3-b7e1-b62676b21b3d" />
   </component>
 </project>
