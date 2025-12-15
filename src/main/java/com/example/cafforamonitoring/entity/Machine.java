@@ -11,11 +11,12 @@ public class Machine {
 
     public Machine() { }
 
-    public Machine(String codice, float lat, float lon, String stato){
+    public Machine(String codice, float lat, float lon, String stato, Timestamp heartbeat){
         this.codice = codice;
         this.lat = lat;
         this.lon = lon;
         this.stato = stato;
+        this.heartbeat = heartbeat;
     }
 
     public String getCodice() { return codice; }

@@ -3,10 +3,9 @@ package com.example.cafforamonitoring.DAO;
 import com.example.cafforamonitoring.entity.Machine;
 import com.example.cafforamonitoring.utility.ConnectionDBMonitor;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.LinkedList;
+import java.util.List;
 
 public class MachineDAO {
     public void insertMachine(Machine machine){
@@ -20,7 +19,7 @@ public class MachineDAO {
             ps.setTimestamp(5, machine.getHeartbeat());
 
             ps.executeUpdate();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException("Impossibile aggiungere distributore", e);
         }
     }
@@ -32,7 +31,7 @@ public class MachineDAO {
             ps.setString(1, codice);
 
             ps.executeUpdate();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException("Impossibile eliminare distributore", e);
         }
     }
@@ -45,7 +44,7 @@ public class MachineDAO {
             ps.setString(2, codice);
 
             ps.executeUpdate();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException("Impossibile aggiornare stato", e);
         }
     }
@@ -58,8 +57,26 @@ public class MachineDAO {
             ps.setString(2, codice);
 
             ps.executeUpdate();
-        } catch (SQLException e) {
+        }catch (SQLException e) {
             throw new RuntimeException("Impossibile aggiornare heartbeat", e);
         }
+    }
+
+    public List<Machine> getAllMachines(){
+        List<Machine> machines = new LinkedList<>();
+        String getAll = "SELECT * FROM machines";
+
+        try(Connection conn = ConnectionDBMonitor.getConnection(); PreparedStatement ps = conn.prepareStatement(getAll)){
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                Machine machine = new Machine(rs.getString("codice"), rs.getFloat("lat"), rs.getFloat("lon"),
+                        rs.getString("stato"), rs.getTimestamp("heartbeat"));
+                machines.add(machine);
+            }
+        }catch (SQLException e) {
+            throw new RuntimeException("Impossibile recuperare distributori", e);
+        }
+
+        return machines;
     }
 }
