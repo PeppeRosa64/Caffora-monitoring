@@ -1,17 +1,17 @@
 package com.example.cafforamonitoring.entity;
 
-import java.sql.Timestamp;
+import java.time.Instant;
 
 public class Machine {
     private String codice;
     private float lat;
     private float lon;
     private String stato;
-    private Timestamp heartbeat;
+    private Instant heartbeat;
 
     public Machine() { }
 
-    public Machine(String codice, float lat, float lon, String stato, Timestamp heartbeat){
+    public Machine(String codice, float lat, float lon, String stato, Instant heartbeat){
         this.codice = codice;
         this.lat = lat;
         this.lon = lon;
@@ -23,11 +23,11 @@ public class Machine {
     public float getLat() { return lat; }
     public float getLon() { return lon; }
     public String getStato() { return stato; }
-    public Timestamp getHeartbeat() { return heartbeat; }
+    public Instant getHeartbeat() { return heartbeat; }
 
     public void setCodice(String codice) { this.codice = codice; }
     public void setLat(float lat) { this.lat = lat; }
     public void setLon(float lon) { this.lon = lon; }
     public void setStato(String stato) { this.stato = stato; }
-    public void setHeartbeat(Timestamp heartbeat) { this.heartbeat = heartbeat; }
+    public void setHeartbeat(Instant heartbeat) { this.heartbeat = heartbeat; }
 }

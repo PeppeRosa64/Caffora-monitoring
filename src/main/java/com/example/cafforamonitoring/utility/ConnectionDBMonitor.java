@@ -6,7 +6,7 @@ import javax.sql.DataSource;
 import java.sql.*;
 
 public class ConnectionDBMonitor {
-    private static DataSource dataSource;
+    private static final DataSource dataSource;
 
     static {
         try {
