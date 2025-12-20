@@ -1,23 +1,21 @@
 package com.example.cafforamonitoring.utility;
 
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 import java.sql.*;
 
 public class ConnectionDBMonitor {
-    private static final DataSource dataSource;
+    private static final String URL = "jdbc:mariadb://localhost:3306/caffora_monitor_db";
+    private static final String USER = "root";
+    private static final String PASSWORD = "1234";
 
     static {
         try {
-            Context context = new InitialContext();
-            dataSource = (DataSource)context.lookup("java:comp/env/jdbc/caffora_monitor_db");
+            Class.forName("org.mariadb.jdbc.Driver");
         } catch (Exception e) {
-            throw new RuntimeException("Impossibile trovare il DataSource", e);
+            throw new RuntimeException("Driver MariaDB non trovato!", e);
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        return dataSource.getConnection();
+        return DriverManager.getConnection(URL, USER, PASSWORD);
     }
 }
