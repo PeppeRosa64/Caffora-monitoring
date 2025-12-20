@@ -24,9 +24,19 @@ public class ManageMachinesServlet extends HttpServlet{
 
                     Machine machine = new Machine(codice, lat, lon, "Attivo", null);
                     service.addMachine(machine);
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    response.getWriter().write("Machine added successfully");
                 }
-                case "delete" -> service.deleteMachine(codice);
-                case "toggleManutenzione" -> service.toggleManutenzione(codice);
+                case "delete" -> {
+                    service.deleteMachine(codice);
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    response.getWriter().write("Machine deleted successfully");
+                }
+                case "toggleManutenzione" -> {
+                    service.toggleManutenzione(codice);
+                    response.setStatus(HttpServletResponse.SC_OK);
+                    response.getWriter().write("Machine status changed successfully");
+                }
             }
         } else {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "Missing machine code");

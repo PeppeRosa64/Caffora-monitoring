@@ -9,14 +9,13 @@ import java.util.List;
 
 public class MachineDAO {
     public void addMachine(Machine machine){
-        String add = "INSERT INTO machines (codice, lat, lon, stato, heartbeat) VALUES (?, ?, ?, ?, ?)";
+        String add = "INSERT INTO machines (codice, lat, lon, stato) VALUES (?, ?, ?, ?)";
 
         try(Connection conn = ConnectionDBMonitor.getConnection(); PreparedStatement ps = conn.prepareStatement(add)){
             ps.setString(1, machine.getCodice());
             ps.setFloat(2, machine.getLat());
             ps.setFloat(3, machine.getLon());
             ps.setString(4, machine.getStato());
-            ps.setTimestamp(5, Timestamp.from(machine.getHeartbeat()));
 
             ps.executeUpdate();
         }catch (SQLException e){
