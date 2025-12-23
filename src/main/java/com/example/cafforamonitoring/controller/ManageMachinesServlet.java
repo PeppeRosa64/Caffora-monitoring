@@ -7,7 +7,7 @@ import com.example.cafforamonitoring.service.MachineService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
-@WebServlet("/adminManagement")
+@WebServlet("/machineManagement")
 public class ManageMachinesServlet extends HttpServlet{
     private final MachineService service = new MachineService();
 
