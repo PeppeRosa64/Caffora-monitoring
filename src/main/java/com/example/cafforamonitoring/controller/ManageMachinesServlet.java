@@ -33,7 +33,7 @@ public class ManageMachinesServlet extends HttpServlet{
                     response.getWriter().write("Machine deleted successfully");
                 }
                 case "toggleManutenzione" -> {
-                    service.toggleManutenzione(codice);
+                    service.changeStatus(codice);
                     response.setStatus(HttpServletResponse.SC_OK);
                     response.getWriter().write("Machine status changed successfully");
                 }

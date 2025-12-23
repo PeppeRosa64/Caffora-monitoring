@@ -35,9 +35,17 @@ public class MachineService {
         }
     }
 
-    public void toggleManutenzione(String codice){
+    public void changeStatus(String codice){
         if (codice != null && !codice.isEmpty()) {
-            String nuovoStato = machineDAO.getStatoByCodice(codice).equals("Manutenzione") ? "Attivo" : "Manutenzione";
+            String stato = machineDAO.getStatoByCodice(codice);
+            String nuovoStato;
+            if(stato.equals("Guasto")){
+                nuovoStato = "Manutenzione";
+            } else if(stato.equals("Manutenzione")){
+                nuovoStato = "Attivo";
+            } else {
+                nuovoStato = "Manutenzione";
+            }
             machineDAO.changeStatus(codice, nuovoStato);
         }
     }
