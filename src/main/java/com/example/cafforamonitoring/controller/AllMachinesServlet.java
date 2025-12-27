@@ -15,26 +15,25 @@ public class AllMachinesServlet extends HttpServlet{
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
         List<Machine> machines = service.getMachineData();
 
-        response.setContentType("application/xml");
+        response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
-        out.println("<distributori>");
+        out.println("[");
         for (Machine m : machines){
-            out.println("\t<distributore>");
-            out.println("\t\t<codice>"+m.getCodice()+"</codice>");
-            out.println("\t\t<lat>"+m.getLat()+"</lat>");
-            out.println("\t\t<lon>"+m.getLon()+"</lon>");
-            out.println("\t\t<stato>"+m.getStato()+"</stato>");
+            out.println("\t{");
+            out.println("\t\tcodice: "+m.getCodice());
+            out.println("\t\tlat: "+m.getLat());
+            out.println("\t\tlon: "+m.getLon());
+            out.println("\t\tstato: "+m.getStato());
             if(m.getHeartbeat() != null){
-                out.println("\t\t<heartbeat>"+m.getHeartbeat()+"</heartbeat>");
+                out.println("\t\theartbeat: "+m.getHeartbeat());
             }else{
-                out.println("\t\t<heartbeat></heartbeat>");
+                out.println("\t\theartbeat: ");
             }
-            out.println("\t</distributore>");
+            out.println("\t}");
         }
-        out.println("</distributori>");
+        out.println("]");
     }
 
     @Override
