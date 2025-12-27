@@ -19,21 +19,25 @@ public class AllMachinesServlet extends HttpServlet{
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
 
-        out.println("[");
-        for (Machine m : machines){
-            out.println("\t{");
-            out.println("\t\tcodice: "+m.getCodice());
-            out.println("\t\tlat: "+m.getLat());
-            out.println("\t\tlon: "+m.getLon());
-            out.println("\t\tstato: "+m.getStato());
+        out.print("[");
+        for (int i = 0; i < machines.size(); i++){
+            Machine m = machines.get(i);
+
+            out.print("{");
+            out.print("\"codice\": \""+m.getCodice()+"\",");
+            out.print("\"lat\": \""+m.getLat()+"\",");
+            out.print("\"lon\": \""+m.getLon()+"\",");
+            out.print("\"stato\": \""+m.getStato()+"\",");
             if(m.getHeartbeat() != null){
-                out.println("\t\theartbeat: "+m.getHeartbeat());
+                out.print("\"heartbeat\": \""+m.getHeartbeat()+"\",");
             }else{
-                out.println("\t\theartbeat: ");
+                out.print("\"heartbeat\": null");
             }
-            out.println("\t}");
+            out.print("}");
+
+            if (i < machines.size()-1) out.print(",");
         }
-        out.println("]");
+        out.print("]");
     }
 
     @Override
