@@ -29,7 +29,7 @@ public class AllMachinesServlet extends HttpServlet{
             out.print("\"lon\": \""+m.getLon()+"\",");
             out.print("\"stato\": \""+m.getStato()+"\",");
             if(m.getHeartbeat() != null){
-                out.print("\"heartbeat\": \""+m.getHeartbeat()+"\",");
+                out.print("\"heartbeat\": \""+m.getHeartbeat()+"\"");
             }else{
                 out.print("\"heartbeat\": null");
             }
