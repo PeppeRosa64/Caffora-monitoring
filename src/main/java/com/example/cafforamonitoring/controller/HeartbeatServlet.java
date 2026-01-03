@@ -5,6 +5,7 @@ import com.example.cafforamonitoring.service.MachineService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+//servlet per l'aggiornamento dell'heartbeat
 @WebServlet("/heartbeat")
 public class HeartbeatServlet extends HttpServlet{
     private final MachineService service = new MachineService();

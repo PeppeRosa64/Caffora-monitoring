@@ -7,6 +7,7 @@ import com.example.cafforamonitoring.service.MachineService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+//servlet che restituisce la lista dei distributori con gli stati aggiornati
 @WebServlet("/api/machines")
 public class AllMachinesServlet extends HttpServlet{
     private final MachineService service = new MachineService();
@@ -28,11 +29,7 @@ public class AllMachinesServlet extends HttpServlet{
             out.print("\"lat\": \""+m.getLat()+"\",");
             out.print("\"lon\": \""+m.getLon()+"\",");
             out.print("\"stato\": \""+m.getStato()+"\",");
-            if(m.getHeartbeat() != null){
-                out.print("\"heartbeat\": \""+m.getHeartbeat()+"\"");
-            }else{
-                out.print("\"heartbeat\": null");
-            }
+            out.print("\"heartbeat\": \""+m.getHeartbeat()+"\"");
             out.print("}");
 
             if (i < machines.size()-1) out.print(",");

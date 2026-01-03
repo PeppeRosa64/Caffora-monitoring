@@ -2,6 +2,7 @@ package com.example.cafforamonitoring.entity;
 
 import java.time.Instant;
 
+//entità del distributore
 public class Machine {
     private String codice;
     private float lat;

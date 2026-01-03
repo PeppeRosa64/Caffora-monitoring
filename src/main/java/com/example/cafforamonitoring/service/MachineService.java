@@ -11,6 +11,7 @@ import java.util.List;
 public class MachineService {
     private final MachineDAO machineDAO = new MachineDAO();
 
+    //lista di tutti i distributori con cambio di stato dei distributori attivi in guasto se non aggiornano l'heartbeat da almeno 3 minuti
     public List<Machine> getMachineData(){
         List<Machine> machines = machineDAO.getAllMachines();
 
@@ -28,13 +29,14 @@ public class MachineService {
         return machines;
     }
 
+    //aggiornamento heartbeat
     public void updateHeartbeat(String codice){
         if (codice != null && !codice.isEmpty()) {
             machineDAO.updateHeartbeat(codice, Timestamp.from(Instant.now()));
-            machineDAO.changeStatus(codice, "Attivo");
         }
     }
 
+    //cambio di stato (Attivo <--> Manutenzione <-- Guasto)
     public void changeStatus(String codice){
         if (codice != null && !codice.isEmpty()) {
             String stato = machineDAO.getStatoByCodice(codice);
@@ -50,6 +52,7 @@ public class MachineService {
         }
     }
 
+    //aggiunta distributore
     public void addMachine(Machine machine){
         if (machine.getCodice() == null || machine.getCodice().isEmpty()) {
             throw new IllegalArgumentException("Il codice distributore è obbligatorio");
@@ -61,6 +64,7 @@ public class MachineService {
         machineDAO.addMachine(machine);
     }
 
+    //rimozione distributore
     public void deleteMachine(String codice){
         if (codice != null && !codice.isEmpty()) {
             machineDAO.deleteMachine(codice);

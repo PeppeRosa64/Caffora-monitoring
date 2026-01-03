@@ -7,6 +7,10 @@ import com.example.cafforamonitoring.service.MachineService;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
+//servlet per la gestione dei distributori tramite codice e action
+//action == add --> aggiunge il distributore
+//action == delete --> rimozione del distributore
+//action == changeStatus --> cambio di stato del distributore
 @WebServlet("/machineManagement")
 public class ManageMachinesServlet extends HttpServlet{
     private final MachineService service = new MachineService();

@@ -4,18 +4,22 @@ import com.example.cafforamonitoring.entity.Machine;
 import com.example.cafforamonitoring.utility.ConnectionDBMonitor;
 
 import java.sql.*;
+import java.time.Instant;
 import java.util.LinkedList;
 import java.util.List;
 
 public class MachineDAO {
+
+    //aggiunta distributore
     public void addMachine(Machine machine){
-        String add = "INSERT INTO machines (codice, lat, lon, stato) VALUES (?, ?, ?, ?)";
+        String add = "INSERT INTO machines (codice, lat, lon, stato, heartbeat) VALUES (?, ?, ?, ?, ?)";
 
         try(Connection conn = ConnectionDBMonitor.getConnection(); PreparedStatement ps = conn.prepareStatement(add)){
             ps.setString(1, machine.getCodice());
             ps.setFloat(2, machine.getLat());
             ps.setFloat(3, machine.getLon());
             ps.setString(4, machine.getStato());
+            ps.setTimestamp(5, Timestamp.from(Instant.now()));
 
             ps.executeUpdate();
         }catch (SQLException e){
@@ -23,6 +27,7 @@ public class MachineDAO {
         }
     }
 
+    //rimozione distributore
     public void deleteMachine(String codice){
         String delete = "DELETE FROM machines WHERE codice = ?";
 
@@ -35,6 +40,7 @@ public class MachineDAO {
         }
     }
 
+    //cambio di stato
     public void changeStatus(String codice, String nuovoStato){
         String update = "UPDATE machines SET stato = ? WHERE codice = ?";
 
@@ -48,6 +54,7 @@ public class MachineDAO {
         }
     }
 
+    //aggiornamento heartbeat
     public void updateHeartbeat(String codice, Timestamp nuovoHeartbeat){
         String update = "UPDATE machines SET heartbeat = ? WHERE codice = ?";
 
@@ -61,6 +68,7 @@ public class MachineDAO {
         }
     }
 
+    //lista di tutti i distributori
     public List<Machine> getAllMachines(){
         List<Machine> machines = new LinkedList<>();
         String getAll = "SELECT * FROM machines";
@@ -79,6 +87,7 @@ public class MachineDAO {
         return machines;
     }
 
+    //ottenere lo stato di un distributore
     public String getStatoByCodice(String codice){
         String getStato = "SELECT stato FROM machines WHERE codice = ?";
 
