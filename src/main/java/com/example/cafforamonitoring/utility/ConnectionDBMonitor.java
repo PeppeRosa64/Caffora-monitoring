@@ -9,7 +9,7 @@ public class ConnectionDBMonitor {
 
     static {
         try {
-            Class.forName("org.mariadb.jdbc.Driver");
+            Class.forName("");
         } catch (Exception e) {
             throw new RuntimeException("Driver MariaDB non trovato!", e);
         }
