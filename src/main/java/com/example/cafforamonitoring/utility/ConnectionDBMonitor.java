@@ -3,9 +3,9 @@ package com.example.cafforamonitoring.utility;
 import java.sql.*;
 
 public class ConnectionDBMonitor {
-    private static final String URL = "jdbc:mariadb://localhost:3306/caffora_monitor_db";
-    private static final String USER = "root";
-    private static final String PASSWORD = "1234";
+    private static final String URL = "";
+    private static final String USER = "";
+    private static final String PASSWORD = "";
 
     static {
         try {
